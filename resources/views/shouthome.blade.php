@@ -4,7 +4,7 @@
     <div class="container mb-5">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <form action="" method="POST" class="mt-5 mb-5">
+                <form action="{{ route('shout.save') }}" method="POST" class="mt-5 mb-5">
                     @csrf
                     <div class="form-group">
                         <textarea name="status" id="" rows="6" class=" shadow-sm form-control"></textarea>

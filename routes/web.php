@@ -24,3 +24,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/shout', [HomeController::class, 'shoutHome'])->name('shout');
+Route::post('/savestatus', [HomeController::class, 'saveStatus'])->name('shout.save');

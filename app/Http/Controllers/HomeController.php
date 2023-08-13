@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use PDO;
 
 class HomeController extends Controller
 {
@@ -29,5 +32,19 @@ class HomeController extends Controller
     public function shoutHome()
     {
         return view("shouthome");
+    }
+
+    public function saveStatus(Request $request)
+    {
+        if (Auth::check()) {
+            $status = $request->post('status');
+            $userId = Auth::id();
+
+            $statusModel = new Status();
+            $statusModel->status = $status;
+            $statusModel->user_id = $userId;
+            $statusModel->save();
+            return redirect()->route('shout');
+        }
     }
 }
