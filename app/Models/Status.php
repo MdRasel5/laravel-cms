@@ -9,4 +9,9 @@ class Status extends Model
 {
     use HasFactory;
     protected $table = 'status';
+
+    function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

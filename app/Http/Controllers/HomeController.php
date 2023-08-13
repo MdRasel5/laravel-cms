@@ -31,7 +31,12 @@ class HomeController extends Controller
 
     public function shoutHome()
     {
-        return view("shouthome");
+        $userId = Auth::id();
+        $status = Status::where('user_id', $userId)->orderBy('id', 'desc')->get();
+
+        return view("shouthome", [
+            'status' => $status,
+        ]);
     }
 
     public function saveStatus(Request $request)
