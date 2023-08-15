@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDO;
@@ -40,6 +41,33 @@ class HomeController extends Controller
             'status' => $status,
             'avatar' => $avatar
         ]);
+    }
+
+    public function publicTimeline($nickname)
+    {
+        $user = User::where('nickname', $nickname)->first();
+        $name = $user->name;
+
+        if ($user) {
+            $status = Status::where('user_id', $user->id)->orderBy('id', 'desc')->get();
+            $avatar = empty($user->avatar) ? asset("images/default_user.jpg") : $user->avatar;
+            $displayActions = false;
+            if (Auth::check()) {
+                if (Auth::user()->id != $user->id) {
+                    $displayActions = true;
+                }
+            }
+
+            return view("shoutpublic", [
+                'status' => $status,
+                'avatar' => $avatar,
+                'name' => $name,
+                'displayActions' => $displayActions,
+                'friendId' => $user->id
+            ]);
+        } else {
+            return redirect('/');
+        }
     }
 
     public function saveStatus(Request $request)

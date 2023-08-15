@@ -51,6 +51,12 @@
             font-size: 40px;
             color: #fff;
         }
+
+        .actions,
+        .actions a {
+            color: #fff;
+            text-align: center;
+        }
     </style>
     <title>Document</title>
 </head>
@@ -70,7 +76,10 @@
         <div class="container h-100">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="site-title">Home</div>
+                    <div class="site-title">{{ $name ?? 'Home' }}</div>
+                    <div class="actions">
+                        @yield('actions')
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,8 +87,7 @@
     @yield('form');
     @yield('status');
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script>
     ;
     (function() {
